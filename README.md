@@ -22,7 +22,7 @@ The analysis uses **76 VOC features** shared across the asthma, bronchiectasis, 
 
 Ridge, Lasso, and ElasticNet logistic regression use VOC features transformed with log1p and standardized within each training fold. Models are evaluated using nested stratified cross validation, with three inner folds for hyperparameter tuning based on ROC AUC and five outer folds for performance evaluation. Tuning covers regularization strength and class weighting, with an additional L1 mixing ratio for ElasticNet.
 
-**Model Comparison.** Values below are the saved outer-fold means ± standard deviations. Bold indicates the highest mean in each metric, including ties. Precision, recall, and F1 treat asthma as the positive class.
+**Model Comparison.** Performance is summarized as the mean ± standard deviation across the five outer folds. Bold indicates the highest mean in each metric, including ties. Precision, recall, and F1 treat asthma as the positive class.
 
 | Model | ROC-AUC | Accuracy | Precision | Recall | F1 score |
 |---|---|---|---|---|---|
@@ -51,7 +51,7 @@ The confusion matrix summarizes Lasso predictions from the outer validation fold
 
 ## 5. End-to-End Workflow & Reproducibility
 
-The notebook's major workflow checkpoints, in execution order, are:
+The analytical workflow proceeds through the following stages:
 
 1. [Import Packages and Load Dataset](notebook/breathomics-asthma.ipynb#Import-Packages-and-Load-Dataset)
 2. [Exploratory Data Analysis](notebook/breathomics-asthma.ipynb#Exploratory-Data-Analysis)
@@ -59,7 +59,7 @@ The notebook's major workflow checkpoints, in execution order, are:
 4. [Model Comparison](notebook/breathomics-asthma.ipynb#Model-Comparison)
 5. [Lasso Logistic Regression and Further Evaluation](notebook/breathomics-asthma.ipynb#Lasso-Logistic-Regression-and-Further-Evaluation)
 
-The notebook records Python 3.14.6. From the repository root, install its imported scientific packages, Excel reader, and Jupyter interface, then open the notebook:
+From the repository root, install the required Python packages and launch the analysis:
 
 ```bash
 python3 -m pip install -r requirements.txt
