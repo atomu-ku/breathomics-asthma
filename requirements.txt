@@ -1,0 +1,15 @@
+# Data processing and Excel input
+numpy
+pandas
+openpyxl
+
+# Visualization
+matplotlib
+seaborn
+
+# Machine learning
+scikit-learn
+
+# Interactive notebook execution
+notebook
+ipykernel
