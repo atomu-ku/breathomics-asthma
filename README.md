@@ -1,28 +1,26 @@
 # Exhaled Breathomics for Asthma Classification Using Nested Cross-Validated Logistic Regression
 
-> **Note on Full Methodology:** The complete end-to-end analytical pipeline, step-by-step methodology, reproducible code, and visualizations are documented in the [Primary Analysis Notebook](notebook/breathomics-asthma.ipynb).
+> **Note on Full Methodology:** The complete end-to-end analytical pipeline, step-by-step methodology, and visualizations are documented in the [Primary Analysis Notebook](notebook/breathomics-asthma.ipynb).
 
 ## 1. Clinical Background & Objective
 
-Asthma is a chronic inflammatory airway disease characterized by variable respiratory symptoms, including wheezing, dyspnea, and cough. These symptoms can overlap with those of bronchiectasis and chronic obstructive pulmonary disease (COPD). Spirometry supports diagnostic assessment but requires patient cooperation and adequate respiratory effort, which can limit its use in young children, frail older adults, and patients unable to perform the test reliably.
+Asthma shares respiratory symptoms with bronchiectasis and chronic obstructive pulmonary disease (COPD), including wheezing, dyspnea, and cough. Spirometry supports diagnosis but requires patient cooperation and adequate respiratory effort, which can limit its use in young children and frail older adults.
 
-This project investigates exhaled volatile organic compound (VOC) profiles as a potential non-invasive approach to support differentiation of asthma from bronchiectasis and COPD.
+This project investigates exhaled volatile organic compound (VOC) profiles as a potential non-invasive approach to support differentiating asthma from other inflammatory airway diseases.
 
-The objective is to develop and evaluate regularized logistic regression models for binary classification of **asthma versus bronchiectasis and COPD** and to identify VOC features consistently selected across cross-validation folds.
+The objective is to develop and evaluate regularized logistic regression models to differentiate **asthma from bronchiectasis and COPD** and to identify VOCs repeatedly selected across cross-validation folds.
 
 ## 2. Cohort & Clinical Data Pipeline
 
-This project uses *A Clinical Breathomics Dataset* (Kuo et al., 2024), developed by researchers at National Taiwan University. The dataset contains exhaled VOC profiles measured using gas chromatography–mass spectrometry (GC–MS) from **121 patients: 53 with asthma, 35 with bronchiectasis, and 33 with COPD**.
+This project uses *A Clinical Breathomics Dataset* (Kuo et al., 2024), developed by researchers at National Taiwan University. The dataset contains exhaled breath profiles comprising **78 shared VOC features** measured using gas chromatography–mass spectrometry (GC–MS) from **121 patients: 53 with asthma, 35 with bronchiectasis, and 33 with COPD**.
 
-The analysis uses **76 VOC features** shared across the asthma, bronchiectasis, and COPD datasets. Each patient's breath profile is represented by GC–MS peak areas for these compounds, forming the input features for classification.
-
-*Detailed workflow: [Import Packages and Load Dataset](notebook/breathomics-asthma.ipynb#Import-Packages-and-Load-Dataset), [Exploratory Data Analysis](notebook/breathomics-asthma.ipynb#Exploratory-Data-Analysis), and [Model Building, Results and Evaluation](notebook/breathomics-asthma.ipynb#Model-Building,-Results-and-Evaluation).*
+*For details on data exploration, see [Exploratory Data Analysis](notebook/breathomics-asthma.ipynb#Exploratory-Data-Analysis).*
 
 ## 3. Methodology & Benchmark Performance
 
 Ridge, Lasso, and ElasticNet logistic regression use VOC features transformed with log1p and standardized within each training fold. Models are evaluated using nested stratified cross validation, with three inner folds for hyperparameter tuning based on ROC AUC and five outer folds for performance evaluation. Tuning covers regularization strength and class weighting, with an additional L1 mixing ratio for ElasticNet.
 
-**Model Comparison.** Performance is summarized as the mean ± standard deviation across the five outer folds. Bold indicates the highest mean in each metric, including ties. Precision, recall, and F1 treat asthma as the positive class.
+**Model Comparison.** Performance is summarized as the mean ± standard deviation across the five outer folds.
 
 | Model | ROC-AUC | Accuracy | Precision | Recall | F1 score |
 |---|---|---|---|---|---|
